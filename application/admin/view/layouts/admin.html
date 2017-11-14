@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="微信小程序生成平台" name="keywords" />
+  <meta content="微信小程序生成平台" name="description" />
+  <link rel="shortcut icon" href="" />
+  <title>{block name="title"}{/block}-微拼车后台管理</title>
+  <link href="__STATIC__/index/src/css/font-awesome.min.css" rel="stylesheet">
+  <link href="__STATIC__/index/src/css/base.css" rel="stylesheet">
+  <link href="__STATIC__/index/src/css/module.css" rel="stylesheet">
+  <link href="__STATIC__/index/src/css/mofang.css" rel="stylesheet">
+  <link href="__STATIC__/index/src/css/emoji.css" rel="stylesheet">
+  <link href="__STATIC__/layui/css/layui.css" rel="stylesheet">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="__STATIC__/index/src/js/html5shiv.__STATIC__/index/src/js"></script>
+  <![endif]-->
+  
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="__STATIC__/index/src/js/jquery-1.10.2.min.js"></script>
+  <![endif]-->
+  <!--[if gte IE 9]><!-->
+  <script type="text/javascript" src="__STATIC__/index/src/js/jquery-2.0.3.min.js"></script>
+  <!--<![endif]-->
+  <script type="text/javascript" src="__STATIC__/index/src/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/jquery.uploadify.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/zeroclipboard.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/dialog.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/admin_common.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/admin_image.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/masonry.pkgd.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/index/src/js/jquery.dragsort-0.5.2.min.js"></script>
+  <script type="text/javascript" src="__STATIC__/layui/layui.js"></script>
+  <script type="text/javascript" src="__STATIC__/jquery-form/jquery.form.min.js"></script>
+  {block name="head"}{/block}
+</head>
+<body>
+<!-- 主体 -->
+
+<div id="main-container" class="admin_container">
+  <div class="sidebar">
+    <ul class="sidenav">
+      <li>
+        <a class="sidenav_parent" href="javascript:void(0);">
+          微拼车
+        </a>
+        <ul class="sidenav_sub">
+          <li class="">
+            <a href="{:url('user/index')}"> 用户列表</a>
+            <b class="active_arrow"></b>
+          </li>
+          <li class="">
+            <a href="{:url('order/index')}"> 订单列表</a>
+            <b class="active_arrow"></b>
+          </li>
+          <li class="">
+            <a href="{:url('category/index')}"> 分类管理</a>
+            <b class="active_arrow"></b>
+          </li>
+          <li class="">
+            <a href="{:url('product/index')}"> 商品管理</a>
+            <b class="active_arrow"></b>
+          </li>
+          <li class="">
+            <a href="{:url('group/index')}"> 拼团管理</a>
+            <b class="active_arrow"></b>
+          </li>
+          <li class="">
+            <a href="{:url('setting/index')}"> 设置中心</a>
+            <b class="active_arrow"></b>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="main_body">
+    <section id="contents">
+      <ul class="tab-nav nav">
+        {block name="tab"}{/block}
+      </ul>
+      <!--<p class="normal_tips"><b class="fa fa-info-circle"></b> 如需开通多门店，请联系本店客服处理</p>-->
+      <div class="tab-content">
+        {block name="content"}{/block}
+      </div>
+    </section>
+  </div>
+</div>
+<!-- /底部 -->
+<script>
+  layui.use(['layer'], function () {
+    window.layer = layui.layer;
+  });
+</script>
+{block name="foot"}{/block}
+</body>
+</html>

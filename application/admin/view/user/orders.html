@@ -1,0 +1,125 @@
+{extend name="layouts/admin"}
+{block name="title"}查看用户订单{/block}
+{block name="head"}
+<style>
+	.pagination {
+		padding: 10px 0;
+		text-align: center;
+	}
+	
+	.pagination li {
+		float: left;
+		border: 1px solid #abc;
+		padding: 5px;
+		margin: 5px;
+	}
+	
+	.pagination li.active {
+		border: none;
+	}
+</style>
+{/block}
+{block name="tab"}
+<li>
+	<a href="{:url('user/index')}">
+		用户列表
+		<span class="arrow fa fa-sort-up"></span>
+	</a>
+</li>
+<li class="current">
+	<a href="">
+		查看用户订单
+		<span class="arrow fa fa-sort-up"></span>
+	</a>
+</li>
+{/block}
+{block name="content"}
+<div>
+	用户ID：{$user.id}
+</div>
+<table class="layui-table">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>订单号</th>
+		<th>支付状态</th>
+		<th>订单状态</th>
+		<th>总金额</th>
+		<th>用户留言</th>
+		<th>购买方式</th>
+		<th>拼团id</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+	{volist name="user.getOrders" id="order"}
+	<tr>
+		<td>{$order.id}</td>
+		<td>{$order.order_id}</td>
+		<td>{$order.is_pay?'已支付':'未支付'}</td>
+		<td>
+			{$order.status}
+		</td>
+		<td>{$order.pay_count}</td>
+		<td>{$order.note}</td>
+		<td>
+			{if condition="$order.purchase_method=='single'"}
+			单买
+			{else if condition="$order.purchase_method=='group'"/}
+			拼团
+			{/if}
+		</td>
+		<td>
+			{if condition="$order.purchase_method=='group'"/}
+			{$order.group_id}
+			{/if}
+		</td>
+		<td>
+			<a href="{:url('order/sendProduct')}?order_id={$order.id}" target="_blank" class="layui-btn layui-btn-small btn-send">订单详情
+			</a>
+			<a href="javascript:void(0)" class="layui-btn layui-btn-small layui-btn-normal btn-refund" data-order-id="{$order.order_id}">
+				退款
+			</a>
+		</td>
+	</tr>
+	{/volist}
+	</tbody>
+</table>
+<script>
+	$('.btn-refund').on('click', function () {
+		var order_id = $(this).attr('data-order-id');
+		if (!confirm('确定要进行退款吗？')) {
+			return false;
+		}
+		$.ajax({
+			url: "{:url('order/refund')}",
+			method: 'post',
+			data: {order_id: order_id},
+			success: function (resp) {
+				if (resp.status == 'success') {
+					layer.alert(resp.msg, {
+						icon: 6,
+						closeBtn: false,
+						btn: ['刷新'],
+						yes: function () {
+							location.reload(true);
+						}
+					});
+				} else {
+					layer.alert(resp.msg, {icon: 5});
+				}
+			},
+			error: function () {
+				layer.alert('网络或服务器错误,请稍后重试', {icon: 2});
+			},
+			beforeSend: function () {
+				layer.load();
+			},
+			complete: function () {
+				layer.closeAll('loading');
+			}
+			
+		});
+	});
+</script>
+{/block}

@@ -1,0 +1,10 @@
+.idea
+composer.lock
+*.log
+thinkphp
+.vscode
+vendor
+runtime/log/*
+runtime/cache/*
+runtime/temp/*
+public/uploads/*
